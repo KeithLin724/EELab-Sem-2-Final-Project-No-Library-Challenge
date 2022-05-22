@@ -7,6 +7,7 @@ Date: 22/5/2022
 */
 
 #include <TimerOne.h>
+
 // set up pin 
 //seven segment display 
 // a b c d e f g DP
@@ -31,12 +32,14 @@ const byte numbersHex[] = { // table (int to HEX code)
 
 // input button about the interrupt 
 const uint8_t button = 2;
+
 // temp setup  
 #define tempInputPin A0 
 #define tempCelsius(num) (num*(5/1024.0)*100) 
+
 // distance setup 
-// trigger is 0 , echo is 1 
-const uint8_t triggerEchoPin[] = { A1,A2 };
+const uint8_t triggerEchoPin[] = { A1,A2 }; // trigger is 0 , echo is 1 
+
 // main variable
 volatile boolean MODE = true; // about the mode , 0 is distance mode , 1 is temperature
 volatile uint16_t mainStep = 0; // display step using for traverse the display array 
@@ -45,6 +48,7 @@ volatile uint16_t mainStep = 0; // display step using for traverse the display a
 #define step_plus(s) ((s + 1) == 6 ? 0: s + 1) 
 
 void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false);
+
 /**
  * @brief measure temperature function
  *
@@ -54,6 +58,7 @@ float measure_temp() {
     auto temp = analogRead(tempInputPin);
     return tempCelsius(static_cast<float>(temp));
 }
+
 /**
  * @brief measure distance function
  *
@@ -111,10 +116,7 @@ void to_display_chr_custom(float number) {
     num_Str.toCharArray(display_chr, 6);
 }
 
-/**
- * @brief change mode
- *
- */
+/// @brief change mode
 void change_mode() {
     static uint32_t last_interrupt_time = 0;
     uint32_t interrupt_time = millis();
@@ -130,10 +132,7 @@ void change_mode() {
 
 }
 
-/**
- * @brief control by timer (about the display)
- *
- */
+/// @brief control by timer (about the display)
 void move_step() {
     mainStep++;
     if (mainStep == 6) {
@@ -145,10 +144,7 @@ void move_step() {
 
 }
 
-/**
- * @brief init the setup function
- *
- */
+/// @brief init the setup function
 void setup() {
     Serial.begin(9600);
     //display setup 
@@ -192,10 +188,7 @@ void clr_dis() {
 }
 
 
-/**
- * @brief Control two seven segment display function
- *
- */
+/// @brief Control two seven segment display function
 void diff_SS() {
     auto tmpStep = mainStep;
     byte displayStep[] = { tmpStep, step_plus(tmpStep) };

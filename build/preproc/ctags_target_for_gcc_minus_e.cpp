@@ -14,6 +14,7 @@ Date: 22/5/2022
 */
 # 9 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 # 10 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino" 2
+
 // set up pin 
 //seven segment display 
 // a b c d e f g DP
@@ -36,15 +37,16 @@ const byte numbersHex[] = { // table (int to HEX code)
 };
 
 
-
 // input button about the interrupt 
 const uint8_t button = 2;
+
 // temp setup  
 
 
+
 // distance setup 
-// trigger is 0 , echo is 1 
-const uint8_t triggerEchoPin[] = { A1,A2 };
+const uint8_t triggerEchoPin[] = { A1,A2 }; // trigger is 0 , echo is 1 
+
 // main variable
 volatile boolean MODE = true; // about the mode , 0 is distance mode , 1 is temperature
 volatile uint16_t mainStep = 0; // display step using for traverse the display array 
@@ -53,6 +55,7 @@ volatile uint16_t mainStep = 0; // display step using for traverse the display a
 
 
 void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false);
+
 /**
 
  * @brief measure temperature function
@@ -62,12 +65,12 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false);
  * @return float
 
  */
-# 54 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 57 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 float measure_temp() {
     auto temp = analogRead(A0);
-    auto
-        return (static_cast<float>(temp)*(5/1024.0)*100);
+    return (static_cast<float>(temp)*(5/1024.0)*100);
 }
+
 /**
 
  * @brief measure distance function
@@ -77,7 +80,7 @@ float measure_temp() {
  * @return int
 
  */
-# 64 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 67 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 int measure_distance() {
     pinMode(triggerEchoPin[0], 0x1);
     digitalWrite(triggerEchoPin[0], 0x0);
@@ -130,14 +133,7 @@ void to_display_chr_custom(float number) {
     num_Str.toCharArray(display_chr, 6);
 }
 
-/**
-
- * @brief change mode
-
- *
-
- */
-# 120 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+/// @brief change mode
 void change_mode() {
     static uint32_t last_interrupt_time = 0;
     uint32_t interrupt_time = millis();
@@ -153,14 +149,7 @@ void change_mode() {
 
 }
 
-/**
-
- * @brief control by timer (about the display)
-
- *
-
- */
-# 139 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+/// @brief control by timer (about the display)
 void move_step() {
     mainStep++;
     if (mainStep == 6) {
@@ -172,14 +161,7 @@ void move_step() {
 
 }
 
-/**
-
- * @brief init the setup function
-
- *
-
- */
-# 154 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+/// @brief init the setup function
 void setup() {
     Serial.begin(9600);
     //display setup 
@@ -223,14 +205,7 @@ void clr_dis() {
 }
 
 
-/**
-
- * @brief Control two seven segment display function
-
- *
-
- */
-# 201 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+/// @brief Control two seven segment display function
 void diff_SS() {
     auto tmpStep = mainStep;
     byte displayStep[] = { tmpStep, ((tmpStep + 1) == 6 ? 0: tmpStep + 1) };
@@ -260,7 +235,7 @@ void diff_SS() {
  * @param DP_only Control decimal point mode
 
  */
-# 224 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 215 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
     bool outDisplaySignal = false;
 
@@ -285,7 +260,7 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
  * @param step about the loop display step
 
  */
-# 244 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 235 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void display_function(uint16_t step) {
 
     Display_SevenSegments(0, false, true); //clear dp

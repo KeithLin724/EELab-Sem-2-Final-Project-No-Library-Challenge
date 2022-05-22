@@ -9,6 +9,7 @@ Date: 22/5/2022
 */
 
 #include <TimerOne.h>
+
 // set up pin 
 //seven segment display 
 // a b c d e f g DP
@@ -29,17 +30,18 @@ const byte numbersHex[] = { // table (int to HEX code)
         B1101111  // 9
 
 };
-
 #define NumberHex(index) numbersHex[index] // get the number nex code 
 
 // input button about the interrupt 
 const uint8_t button = 2;
+
 // temp setup  
 #define tempInputPin A0 
 #define tempCelsius(num) (num*(5/1024.0)*100) 
+
 // distance setup 
-// trigger is 0 , echo is 1 
-const uint8_t triggerEchoPin[] = { A1,A2 };
+const uint8_t triggerEchoPin[] = { A1,A2 }; // trigger is 0 , echo is 1 
+
 // main variable
 volatile boolean MODE = true; // about the mode , 0 is distance mode , 1 is temperature
 volatile uint16_t mainStep = 0; // display step using for traverse the display array 
@@ -48,39 +50,40 @@ volatile uint16_t mainStep = 0; // display step using for traverse the display a
 #define step_plus(s) ((s + 1) == 6 ? 0: s + 1) 
 
 void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false);
+
 /**
  * @brief measure temperature function
  *
  * @return float
  */
-#line 54 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 57 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 float measure_temp();
-#line 64 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 67 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 int measure_distance();
-#line 82 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 85 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void to_display_chr_custom(float number);
 #line 120 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void change_mode();
-#line 139 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 136 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void move_step();
-#line 154 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 148 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void setup();
-#line 181 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 175 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void loop();
-#line 185 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 179 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void passive_pin(boolean f_s);
-#line 191 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 185 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void clr_dis();
-#line 201 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 192 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void diff_SS();
-#line 244 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 235 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void display_function(uint16_t step);
-#line 54 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 57 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 float measure_temp() {
     auto temp = analogRead(tempInputPin);
-    auto
-        return tempCelsius(static_cast<float>(temp));
+    return tempCelsius(static_cast<float>(temp));
 }
+
 /**
  * @brief measure distance function
  *
@@ -138,10 +141,7 @@ void to_display_chr_custom(float number) {
     num_Str.toCharArray(display_chr, 6);
 }
 
-/**
- * @brief change mode
- *
- */
+/// @brief change mode
 void change_mode() {
     static uint32_t last_interrupt_time = 0;
     uint32_t interrupt_time = millis();
@@ -157,10 +157,7 @@ void change_mode() {
 
 }
 
-/**
- * @brief control by timer (about the display)
- *
- */
+/// @brief control by timer (about the display)
 void move_step() {
     mainStep++;
     if (mainStep == 6) {
@@ -172,10 +169,7 @@ void move_step() {
 
 }
 
-/**
- * @brief init the setup function
- *
- */
+/// @brief init the setup function
 void setup() {
     Serial.begin(9600);
     //display setup 
@@ -219,10 +213,7 @@ void clr_dis() {
 }
 
 
-/**
- * @brief Control two seven segment display function
- *
- */
+/// @brief Control two seven segment display function
 void diff_SS() {
     auto tmpStep = mainStep;
     byte displayStep[] = { tmpStep, step_plus(tmpStep) };
