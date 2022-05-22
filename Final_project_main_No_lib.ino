@@ -145,64 +145,6 @@ void move_step() {
 }
 
 /**
- * @brief function of display using step
- *
- * @param step about the loop display step
- */
-void display_function(uint16_t step) {
-    Display_SevenSegments(0, false, true); // close dp
-    if (MODE) {
-        switch (step) {
-        case 0:
-            Display_SevenSegments(NumberHex(to_INT(display_chr[0])));
-            break;
-        case 1:
-            Display_SevenSegments(NumberHex(to_INT(display_chr[1])));
-            break;
-        case 2:
-            Display_SevenSegments(NumberHex(to_INT(display_chr[2])));
-            break;
-        case 3:
-            Display_SevenSegments(B0111001); // C 
-            break;
-        case 4:
-            Display_SevenSegments(B1010100); // 'n' hex code 
-            break;
-        case 5:
-            Display_SevenSegments(B0000000); // clean 
-            break;
-        default:
-            break;
-        }
-    }
-    else {
-        switch (step) {
-        case 0:
-            Display_SevenSegments(NumberHex(to_INT(display_chr[0])));
-            break;
-        case 1:
-            Display_SevenSegments(NumberHex(to_INT(display_chr[1])), true);
-            break;
-        case 2:
-            Display_SevenSegments(NumberHex(to_INT(display_chr[2])));
-            break;
-        case 3:
-            Display_SevenSegments(B1100011); // o
-            break;
-        case 4:
-            Display_SevenSegments(B0111001); // C
-            break;
-        case 5:
-            Display_SevenSegments(B0000000); // clean 
-            break;
-        default:
-            break;
-        }
-    }
-
-}
-
-/**
  * @brief init the setup function
  *
  */
@@ -288,5 +230,63 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
     }
 
     digitalWrite(displayPins[7], !DP);
+
+}
+
+/**
+ * @brief function of display using step
+ *
+ * @param step about the loop display step
+ */
+void display_function(uint16_t step) {
+    Display_SevenSegments(0, false, true); // close dp
+    if (MODE) {
+        switch (step) {
+        case 0:
+            Display_SevenSegments(NumberHex(to_INT(display_chr[0])));
+            break;
+        case 1:
+            Display_SevenSegments(NumberHex(to_INT(display_chr[1])));
+            break;
+        case 2:
+            Display_SevenSegments(NumberHex(to_INT(display_chr[2])));
+            break;
+        case 3:
+            Display_SevenSegments(B0111001); // C 
+            break;
+        case 4:
+            Display_SevenSegments(B1010100); // 'n' hex code 
+            break;
+        case 5:
+            Display_SevenSegments(B0000000); // clean 
+            break;
+        default:
+            break;
+        }
+    }
+    else {
+        switch (step) {
+        case 0:
+            Display_SevenSegments(NumberHex(to_INT(display_chr[0])));
+            break;
+        case 1:
+            Display_SevenSegments(NumberHex(to_INT(display_chr[1])), true);
+            break;
+        case 2:
+            Display_SevenSegments(NumberHex(to_INT(display_chr[2])));
+            break;
+        case 3:
+            Display_SevenSegments(B1100011); // o
+            break;
+        case 4:
+            Display_SevenSegments(B0111001); // C
+            break;
+        case 5:
+            Display_SevenSegments(B0000000); // clean 
+            break;
+        default:
+            break;
+        }
+    }
 
 }
