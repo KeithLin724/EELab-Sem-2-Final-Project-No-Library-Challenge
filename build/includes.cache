@@ -1,0 +1,27 @@
+[
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino"
+  },
+  {
+    "Sourcefile": null,
+    "Include": "",
+    "Includepath": "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard"
+  },
+  {
+    "Sourcefile": "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\build\\sketch\\Final_project_main_No_lib.ino.cpp",
+    "Include": "TimerOne.h",
+    "Includepath": "C:\\Users\\USER\\OneDrive\\文件\\Arduino\\libraries\\TimerOne-1.1.0"
+  },
+  {
+    "Sourcefile": "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\build\\sketch\\Final_project_main_No_lib.ino.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "C:\\Users\\USER\\OneDrive\\文件\\Arduino\\libraries\\TimerOne-1.1.0\\TimerOne.cpp",
+    "Include": "",
+    "Includepath": null
+  }
+]
