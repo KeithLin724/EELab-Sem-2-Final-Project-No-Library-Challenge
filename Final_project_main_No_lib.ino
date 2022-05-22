@@ -13,7 +13,8 @@ Date: 22/5/2022
 const uint8_t displayPins[8] = { 11, 10, 8, 7, 6, 12, 13, 9 };
 const uint8_t pinDiff[2] = { 5,4 }; // control two different display
 char display_chr[6] = {}; // display array 
-const byte numbersHex[] = {
+
+const byte numbersHex[] = { // table (int to HEX code)
         B0111111, // 0
         B0000110, // 1
         B1011011, // 2
@@ -26,7 +27,7 @@ const byte numbersHex[] = {
         B1101111  // 9
 
 };
-#define NumberHex(index) numbersHex[index]
+#define NumberHex(index) numbersHex[index] // get the number nex code 
 
 // input button about the interrupt 
 const uint8_t button = 2;
@@ -34,11 +35,11 @@ const uint8_t button = 2;
 #define tempInputPin A0 
 #define tempCelsius(num) (num*(5/1024.0)*100) 
 // distance setup 
-// trigger is 0 , echo 1 
+// trigger is 0 , echo is 1 
 const uint8_t triggerEchoPin[] = { A1,A2 };
 // main variable
-volatile boolean MODE = true;
-volatile uint16_t mainStep = 0;
+volatile boolean MODE = true; // about the mode , 0 is distance mode , 1 is temperature
+volatile uint16_t mainStep = 0; // display step using for traverse the display array 
 #define to_INT(chr) (chr - '0')
 // step de-overflow func 
 #define step_plus(s) ((s + 1) == 6 ? 0: s + 1) 
