@@ -198,9 +198,9 @@ void clr_dis() {
  */
 void diff_SS() {
     auto tmpStep = mainStep;
-
     byte displayStep[] = { tmpStep, step_plus(tmpStep) };
     bool state = false;
+
     for (auto& e : displayStep) {
         clr_dis();
         // TODO 
@@ -240,7 +240,9 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
  * @param step about the loop display step
  */
 void display_function(uint16_t step) {
-    Display_SevenSegments(0, false, true); // close dp
+
+    Display_SevenSegments(0, false, true); //clear dp
+
     if (MODE) {
         switch (step) {
         case 0:
