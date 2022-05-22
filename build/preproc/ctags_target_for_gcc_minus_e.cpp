@@ -36,6 +36,7 @@ const byte numbersHex[] = { // table (int to HEX code)
 };
 
 
+
 // input button about the interrupt 
 const uint8_t button = 2;
 // temp setup  
@@ -61,10 +62,11 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false);
  * @return float
 
  */
-# 53 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 54 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 float measure_temp() {
     auto temp = analogRead(A0);
-    return (static_cast<float>(temp)*(5/1024.0)*100);
+    auto
+        return (static_cast<float>(temp)*(5/1024.0)*100);
 }
 /**
 
@@ -75,7 +77,7 @@ float measure_temp() {
  * @return int
 
  */
-# 62 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 64 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 int measure_distance() {
     pinMode(triggerEchoPin[0], 0x1);
     digitalWrite(triggerEchoPin[0], 0x0);
@@ -135,7 +137,7 @@ void to_display_chr_custom(float number) {
  *
 
  */
-# 118 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 120 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void change_mode() {
     static uint32_t last_interrupt_time = 0;
     uint32_t interrupt_time = millis();
@@ -158,7 +160,7 @@ void change_mode() {
  *
 
  */
-# 137 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 139 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void move_step() {
     mainStep++;
     if (mainStep == 6) {
@@ -177,7 +179,7 @@ void move_step() {
  *
 
  */
-# 152 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 154 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void setup() {
     Serial.begin(9600);
     //display setup 
@@ -228,7 +230,7 @@ void clr_dis() {
  *
 
  */
-# 199 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 201 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void diff_SS() {
     auto tmpStep = mainStep;
     byte displayStep[] = { tmpStep, ((tmpStep + 1) == 6 ? 0: tmpStep + 1) };
@@ -258,7 +260,7 @@ void diff_SS() {
  * @param DP_only Control decimal point mode
 
  */
-# 222 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 224 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
     bool outDisplaySignal = false;
 
@@ -283,7 +285,7 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
  * @param step about the loop display step
 
  */
-# 242 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 244 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void display_function(uint16_t step) {
 
     Display_SevenSegments(0, false, true); //clear dp
