@@ -3,7 +3,7 @@
 
 Title:Final Project
 
-Written By Keith Lin and MPLiew
+Written By Keith Lin
 
 This is a code using for EELab
 
@@ -100,47 +100,40 @@ int measure_distance() {
 }
 
 void to_display_chr_custom(float number) {
-    String num_Str;
+    String num_Str = "";
     Serial.print("Mode: "); // Serial output the mode 
 
-    num_Str = String("000");
+    //num_Str = String("000");
+    if (number < 0) {
+        String("000").toCharArray(display_chr, 6);
+        return;
+    }
+
     if (MODE) { // distance mode (int)
         Serial.print("distance mode, ");
         if (number < 100) {
             // add zero in front 
-            if (number > 0) {
-                num_Str = String('0');
-
-                if (number < 10) {
-                    num_Str += String('0');
-                }
-                num_Str += String(static_cast<int>(number));
-            }
+            num_Str += (number < 10 ? "00" : "0");
         }
-        else {
-            num_Str = String(static_cast<int>(number));
 
-        }
+        num_Str += String(static_cast<int>(number));
         Serial.print((number < 0 ? 0 : number));
         Serial.println(" cm");
     }
     else { //temperature mode  (float)
+        auto tmpNumber = number;
         Serial.print("temperature mode, ");
-
-        //num_Str = String(static_cast<int>((number < 100 ? number * 10 : number)));
 
         if (number < 100) {
 
             if (number < 10) {
-                num_Str = String('0') + String(static_cast<int>(number * 10));
+                num_Str += String('0');
+
             }
-            else {
-                num_Str = String(static_cast<int>(number * 10));
-            }
+            tmpNumber *= 10;
         }
-        else {
-            num_Str = String(static_cast<int>(number));
-        }
+
+        num_Str = String(static_cast<int>(tmpNumber));
 
         Serial.print(number);
         Serial.println(" C");
@@ -253,7 +246,7 @@ void diff_SS() {
  * @param DP_only Control decimal point mode
 
  */
-# 233 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 226 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
     bool outDisplaySignal = false;
 
@@ -278,7 +271,7 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
  * @param step about the loop display step
 
  */
-# 253 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 246 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void display_function(uint16_t step) {
 
     Display_SevenSegments(0, false, true); //clear dp
