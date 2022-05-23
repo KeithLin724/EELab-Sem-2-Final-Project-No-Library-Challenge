@@ -62,21 +62,21 @@ float measure_temp();
 int measure_distance();
 #line 85 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void to_display_chr_custom(float number);
-#line 120 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 137 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void change_mode();
-#line 136 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 153 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void move_step();
-#line 148 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 165 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void setup();
-#line 175 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 193 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void loop();
-#line 179 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 197 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void passive_pin(boolean f_s);
-#line 185 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 203 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void clr_dis();
-#line 192 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 210 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void diff_SS();
-#line 235 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 253 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void display_function(uint16_t step);
 #line 57 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 float measure_temp() {
@@ -111,15 +111,19 @@ void to_display_chr_custom(float number) {
     String num_Str;
     Serial.print("Mode: "); // Serial output the mode 
 
-    if (MODE) {// distance mode 
+    num_Str = String("000");
+    if (MODE) { // distance mode (int)
         Serial.print("distance mode, ");
         if (number < 100) {
             // add zero in front 
-            num_Str = String("000");
             if (number > 0) {
-                num_Str = String('0') + String(static_cast<int>(number));
-            }
+                num_Str = String('0');
 
+                if (number < 10) {
+                    num_Str += String('0');
+                }
+                num_Str += String(static_cast<int>(number));
+            }
         }
         else {
             num_Str = String(static_cast<int>(number));
@@ -128,10 +132,23 @@ void to_display_chr_custom(float number) {
         Serial.print((number < 0 ? 0 : number));
         Serial.println(" cm");
     }
-    else { //temperature mode  
+    else { //temperature mode  (float)
         Serial.print("temperature mode, ");
 
-        num_Str = String(static_cast<int>((number < 100 ? number * 10 : number)));
+        //num_Str = String(static_cast<int>((number < 100 ? number * 10 : number)));
+
+        if (number < 100) {
+
+            if (number < 10) {
+                num_Str = String('0') + String(static_cast<int>(number * 10));
+            }
+            else {
+                num_Str = String(static_cast<int>(number * 10));
+            }
+        }
+        else {
+            num_Str = String(static_cast<int>(number));
+        }
 
         Serial.print(number);
         Serial.println(" C");
@@ -171,6 +188,7 @@ void move_step() {
 
 /// @brief init the setup function
 void setup() {
+    // out put the source from the Serial port 
     Serial.begin(9600);
     //display setup 
     for (auto& pin : displayPins) {
