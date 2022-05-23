@@ -1,3 +1,11 @@
+'''
+Title:tran 
+Written By Keith Lin
+This is a code for change the format about the hex code 
+hex code is for display 
+Date: 23/5/2022
+'''
+
 strTranList = ['B1111110',
                'B0110000',
                'B1101101',
@@ -10,11 +18,11 @@ strTranList = ['B1111110',
                'B1111011']
 outPrint = []
 inP = ['B1100011']
+
 for i in inP:
     strList = list(i)
     tmp = strList[1:]  # take out the B
     tmp = tmp[::-1]
-    #tmp.insert(2, '0')
 
     outPrint.append('B' + ''.join(tmp))
 
