@@ -18,7 +18,7 @@ Date: 22/5/2022
 // set up pin 
 //seven segment display 
 // a b c d e f g DP
-const uint8_t displayPins[8] = { 11, 10, 8, 7, 6, 12, 13, 9 };
+const uint8_t displayPins[8] = { 12, 13, 8, 7, 6, 11, 10, 9 };//}, 10, 8, 7, 6, 12, 13, 9 };
 const uint8_t pinDiff[2] = { 5,4 }; // control two different display
 char display_chr[6] = {}; // display array 
 
@@ -101,9 +101,9 @@ int measure_distance() {
 
 void to_display_chr_custom(float number) {
     String num_Str = "";
+    auto tmpNumber = number;
     Serial.print("Mode: "); // Serial output the mode 
 
-    //num_Str = String("000");
     if (number < 0) {
         String("000").toCharArray(display_chr, 6);
         return;
@@ -111,35 +111,30 @@ void to_display_chr_custom(float number) {
 
     if (MODE) { // distance mode (int)
         Serial.print("distance mode, ");
-        if (number < 100) {
-            // add zero in front 
+
+        if (number < 100) {// add zero in front 
             num_Str += (number < 10 ? "00" : "0");
         }
+        tmpNumber = number;
 
-        num_Str += String(static_cast<int>(number));
         Serial.print((number < 0 ? 0 : number));
         Serial.println(" cm");
     }
     else { //temperature mode  (float)
-        auto tmpNumber = number;
         Serial.print("temperature mode, ");
 
         if (number < 100) {
-
             if (number < 10) {
-                num_Str += String('0');
-
+                num_Str += "0";
             }
+
             tmpNumber *= 10;
         }
 
-        num_Str = String(static_cast<int>(tmpNumber));
-
         Serial.print(number);
         Serial.println(" C");
-
     }
-
+    num_Str += String(static_cast<int>(tmpNumber));
     num_Str.toCharArray(display_chr, 6);
 }
 
@@ -246,7 +241,7 @@ void diff_SS() {
  * @param DP_only Control decimal point mode
 
  */
-# 226 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 221 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
     bool outDisplaySignal = false;
 
@@ -271,7 +266,7 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
  * @param step about the loop display step
 
  */
-# 246 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 241 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void display_function(uint16_t step) {
 
     Display_SevenSegments(0, false, true); //clear dp
