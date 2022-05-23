@@ -116,7 +116,6 @@ void to_display_chr_custom(float number) {
 
         Serial.print(number);
         Serial.println(" C");
-
     }
     num_Str += String(static_cast<int>(tmpNumber));
     num_Str.toCharArray(display_chr, 6);
