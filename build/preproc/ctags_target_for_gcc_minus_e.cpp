@@ -18,7 +18,7 @@ Date: 22/5/2022
 // set up pin 
 //seven segment display 
 // a b c d e f g DP
-const uint8_t displayPins[8] = { 12, 13, 8, 7, 6, 11, 10, 9 };//}, 10, 8, 7, 6, 12, 13, 9 };
+const uint8_t displayPins[8] = { 11,10, 8, 7, 6, 12, 13, 9 };
 const uint8_t pinDiff[2] = { 5,4 }; // control two different display
 char display_chr[6] = {}; // display array 
 
