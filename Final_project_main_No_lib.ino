@@ -1,6 +1,6 @@
 /*
 Title:Final Project
-Written By Keith Lin and MPLiew
+Written By Keith Lin
 This is a code using for EELab
 Sem 2 final project
 Date: 22/5/2022
