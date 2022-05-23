@@ -110,15 +110,15 @@ void to_display_chr_custom(float number) {
     else { //temperature mode  (float)
         Serial.print("temperature mode, ");
 
-        //num_Str = String(static_cast<int>((number < 100 ? number * 10 : number)));
-
         if (number < 100) {
 
             if (number < 10) {
                 num_Str = String('0') + String(static_cast<int>(number * 10));
+
             }
-            else {
+            else { //10 < number< 100
                 num_Str = String(static_cast<int>(number * 10));
+
             }
         }
         else {
