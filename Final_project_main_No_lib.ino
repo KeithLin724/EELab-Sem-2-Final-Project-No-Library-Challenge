@@ -4,6 +4,7 @@ Written By Keith Lin
 This is a code using for EELab
 Sem 2 final project
 Date: 22/5/2022
+gifted to MP Liew
 */
 
 #include <TimerOne.h>

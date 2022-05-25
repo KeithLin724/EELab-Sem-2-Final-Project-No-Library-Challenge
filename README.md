@@ -1,6 +1,7 @@
 # EELab Sem 2 final project 2022 No library challenge 
 
-#### Written by **KYLiN** and **MP Liew** 
+#### Written by **KYLiN** 
+#### gifted to ***MP Liew*** 
 
 ---
 
