@@ -11,9 +11,11 @@ Sem 2 final project
 
 Date: 22/5/2022
 
+gifted to MP Liew
+
 */
-# 9 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
-# 10 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino" 2
+# 10 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 11 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino" 2
 
 // set up pin 
 //seven segment display 
@@ -65,7 +67,7 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false);
  * @return float
 
  */
-# 57 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 58 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 float measure_temp() {
     auto temp = analogRead(A0);
     return (static_cast<float>(temp)*(5/1024.0)*100);
@@ -80,7 +82,7 @@ float measure_temp() {
  * @return int
 
  */
-# 67 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 68 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 int measure_distance() {
     pinMode(triggerEchoPin[0], 0x1);
     digitalWrite(triggerEchoPin[0], 0x0);
@@ -241,7 +243,7 @@ void diff_SS() {
  * @param DP_only Control decimal point mode
 
  */
-# 221 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 222 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
     bool outDisplaySignal = false;
 
@@ -266,7 +268,7 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
  * @param step about the loop display step
 
  */
-# 241 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+# 242 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void display_function(uint16_t step) {
 
     Display_SevenSegments(0, false, true); //clear dp
