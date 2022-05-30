@@ -12,10 +12,12 @@ This library is using for display function in cycle
 You can clack this link to know more about how to download library 
 
 - TimerOne
-- - https://github.com/PaulStoffregen/TimerOne
+  - https://github.com/PaulStoffregen/TimerOne
   
-- Download doc
-- - https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries
+- Download Doc
+  - https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries
+
+You can click the `Download Zip` to download it
 
 ---
 # Setting pin 
@@ -34,7 +36,7 @@ About the setting pin
 ![](/readme_img/TriEcho.png)
 
 --- 
-# Flow chart 
+# Program Flow Chart 
 ```mermaid 
 flowchart 
     ButtonMode
