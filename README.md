@@ -19,6 +19,10 @@ You can clack this link to know more about how to download library
 
 You can click the `Download Zip` to download it
 
+Or You can use the command to download it 
+
+`git clone https://github.com/KeithLin724/EELab-Sem-2-Final-Project-No-Library-Challenge`
+
 ---
 # Setting pin 
 About the setting pin 
