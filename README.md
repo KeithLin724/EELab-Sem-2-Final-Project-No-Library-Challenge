@@ -4,27 +4,34 @@
 #### gifted to ***MP Liew*** 
 
 ---
-
+## Description 
 You only need to download the library call ```TimerOne```
 
 This library is using for display function in cycle 
 
 You can clack this link to know more about how to download library 
 
-- TimerOne
+- **TimerOne**
   - https://github.com/PaulStoffregen/TimerOne
   
-- Download Doc
+- **Download Doc**
   - https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries
+
+---
+## Download Library
+
+#### ***Zip***
 
 You can click the `Download Zip` to download it
 
+
+#### ***Git***
 Or You can use the command to download it 
 
 `git clone https://github.com/KeithLin724/EELab-Sem-2-Final-Project-No-Library-Challenge`
 
 ---
-# Setting pin 
+## Setting pin 
 About the setting pin 
 
 > **Display pin**
@@ -40,7 +47,7 @@ About the setting pin
 ![](/readme_img/TriEcho.png)
 
 --- 
-# Program Flow Chart 
+## Program Flow Chart 
 ```mermaid 
 flowchart 
     ButtonMode
