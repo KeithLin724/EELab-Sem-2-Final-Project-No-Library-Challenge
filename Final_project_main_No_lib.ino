@@ -46,7 +46,7 @@ volatile boolean MODE = true; // about the mode , 0 is distance mode , 1 is temp
 volatile uint16_t mainStep = 0; // display step using for traverse the display array 
 #define to_INT(chr) (chr - '0')
 // step de-overflow func 
-#define step_plus(s) ((s + 1) == 6 ? 0: s + 1) 
+#define nextStep(s) ((s + 1) == 6 ? 0: s + 1) 
 
 void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false);
 
@@ -78,11 +78,11 @@ int measure_distance() {
     pinMode(triggerEchoPin[1], INPUT);
 
     auto tmp = pulseIn(triggerEchoPin[1], HIGH);
-    int distance = tmp * 0.034 / 2;
 
-    return distance;
+    return static_cast<int>(tmp * 0.034 / 2);
 }
 
+/// @brief convert voltage to a display array to display (is a custom function)
 void to_display_chr_custom(float number) {
     String num_Str = "";
     auto tmpNumber = number;
@@ -124,17 +124,17 @@ void to_display_chr_custom(float number) {
 
 /// @brief change mode
 void change_mode() {
-    static uint32_t last_interrupt_time = 0;
-    uint32_t interrupt_time = millis();
+    static uint32_t lastInterruptTime = 0;
+    uint32_t interruptTime = millis();
 
-    if (interrupt_time - last_interrupt_time > 200) { //debouncing function 
+    if (interruptTime - lastInterruptTime > 200) { //debouncing function 
         MODE = !MODE; //change mode 
         mainStep = 0; //init step 
 
         to_display_chr_custom((MODE == 1) ? measure_distance() : measure_temp());
 
     }
-    last_interrupt_time = interrupt_time;
+    lastInterruptTime = interruptTime;
 
 }
 
@@ -179,10 +179,16 @@ void setup() {
 
 }
 
+/// @brief main loop
 void loop() {
     diff_SS();
 }
 
+/**
+ * @brief make pin display is passive
+ *
+ * @param f_s control the light pin
+ */
 void passive_pin(boolean f_s) {
     digitalWrite(pinDiff[0], f_s);
     digitalWrite(pinDiff[1], !f_s);
@@ -194,11 +200,10 @@ void clr_dis() {
     digitalWrite(pinDiff[1], LOW);
 }
 
-
 /// @brief Control two seven segment display function
 void diff_SS() {
     auto tmpStep = mainStep;
-    byte displayStep[] = { tmpStep, step_plus(tmpStep) };
+    byte displayStep[] = { tmpStep, nextStep(tmpStep) };
     bool state = false;
 
     for (auto& e : displayStep) {

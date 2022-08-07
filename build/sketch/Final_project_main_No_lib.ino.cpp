@@ -48,7 +48,7 @@ volatile boolean MODE = true; // about the mode , 0 is distance mode , 1 is temp
 volatile uint16_t mainStep = 0; // display step using for traverse the display array 
 #define to_INT(chr) (chr - '0')
 // step de-overflow func 
-#define step_plus(s) ((s + 1) == 6 ? 0: s + 1) 
+#define nextStep(s) ((s + 1) == 6 ? 0: s + 1) 
 
 void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false);
 
@@ -223,7 +223,7 @@ void clr_dis() {
 /// @brief Control two seven segment display function
 void diff_SS() {
     auto tmpStep = mainStep;
-    byte displayStep[] = { tmpStep, step_plus(tmpStep) };
+    byte displayStep[] = { tmpStep, nextStep(tmpStep) };
     bool state = false;
 
     for (auto& e : displayStep) {
