@@ -9,7 +9,7 @@ You only need to download the library call ```TimerOne```
 
 This library is using for display function in cycle 
 
-You can clack this link to know more about how to download library 
+You can click this link to know more about how to download library 
 
 - **TimerOne**
   - https://github.com/PaulStoffregen/TimerOne

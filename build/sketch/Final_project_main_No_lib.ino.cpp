@@ -69,15 +69,15 @@ void change_mode();
 void move_step();
 #line 154 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void setup();
-#line 182 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 183 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void loop();
-#line 186 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
-void passive_pin(boolean f_s);
 #line 192 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+void passive_pin(boolean f_s);
+#line 198 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void clr_dis();
-#line 199 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 204 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void diff_SS();
-#line 242 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
+#line 247 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void display_function(uint16_t step);
 #line 58 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 float measure_temp() {
@@ -103,11 +103,11 @@ int measure_distance() {
     pinMode(triggerEchoPin[1], INPUT);
 
     auto tmp = pulseIn(triggerEchoPin[1], HIGH);
-    int distance = tmp * 0.034 / 2;
 
-    return distance;
+    return static_cast<int>(tmp * 0.034 / 2);
 }
 
+/// @brief convert voltage to a display array to display (is a custom function)
 void to_display_chr_custom(float number) {
     String num_Str = "";
     auto tmpNumber = number;
@@ -149,17 +149,17 @@ void to_display_chr_custom(float number) {
 
 /// @brief change mode
 void change_mode() {
-    static uint32_t last_interrupt_time = 0;
-    uint32_t interrupt_time = millis();
+    static uint32_t lastInterruptTime = 0;
+    uint32_t interruptTime = millis();
 
-    if (interrupt_time - last_interrupt_time > 200) { //debouncing function 
+    if (interruptTime - lastInterruptTime > 200) { //debouncing function 
         MODE = !MODE; //change mode 
         mainStep = 0; //init step 
 
         to_display_chr_custom((MODE == 1) ? measure_distance() : measure_temp());
 
     }
-    last_interrupt_time = interrupt_time;
+    lastInterruptTime = interruptTime;
 
 }
 
@@ -204,10 +204,16 @@ void setup() {
 
 }
 
+/// @brief main loop
 void loop() {
     diff_SS();
 }
 
+/**
+ * @brief make pin display is passive
+ *
+ * @param f_s control the light pin
+ */
 void passive_pin(boolean f_s) {
     digitalWrite(pinDiff[0], f_s);
     digitalWrite(pinDiff[1], !f_s);
@@ -218,7 +224,6 @@ void clr_dis() {
     digitalWrite(pinDiff[0], LOW);
     digitalWrite(pinDiff[1], LOW);
 }
-
 
 /// @brief Control two seven segment display function
 void diff_SS() {
