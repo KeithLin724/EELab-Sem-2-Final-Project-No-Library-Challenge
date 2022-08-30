@@ -72,13 +72,13 @@ void setup();
 #line 183 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void loop();
 #line 192 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
-void passive_pin(boolean f_s);
+void passive_pin(const boolean& f_s);
 #line 198 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void clr_dis();
 #line 204 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 void diff_SS();
 #line 247 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
-void display_function(uint16_t step);
+void display_function(const uint16_t& step);
 #line 58 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
 float measure_temp() {
     auto temp = analogRead(tempInputPin);
@@ -214,7 +214,7 @@ void loop() {
  *
  * @param f_s control the light pin
  */
-void passive_pin(boolean f_s) {
+void passive_pin(const boolean& f_s) {
     digitalWrite(pinDiff[0], f_s);
     digitalWrite(pinDiff[1], !f_s);
 }
@@ -231,7 +231,7 @@ void diff_SS() {
     byte displayStep[] = { tmpStep, nextStep(tmpStep) };
     bool state = false;
 
-    for (auto& e : displayStep) {
+    for (const auto& e : displayStep) {
         clr_dis();
         // TODO 
         display_function(e);
@@ -253,7 +253,7 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
     bool outDisplaySignal = false;
 
     if (!DP_only) {
-        for (int i = 0; i < 7; i++) {
+        for (int i(0); i < 7; i++) {
             outDisplaySignal = bitRead(hex, i);
             //output
             digitalWrite(displayPins[i], !outDisplaySignal);
@@ -269,7 +269,7 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
  *
  * @param step about the loop display step
  */
-void display_function(uint16_t step) {
+void display_function(const uint16_t& step) {
 
     Display_SevenSegments(0, false, true); //clear dp
 

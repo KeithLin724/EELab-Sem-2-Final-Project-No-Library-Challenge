@@ -212,7 +212,7 @@ void loop() {
 
  */
 # 192 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
-void passive_pin(boolean f_s) {
+void passive_pin(const boolean& f_s) {
     digitalWrite(pinDiff[0], f_s);
     digitalWrite(pinDiff[1], !f_s);
 }
@@ -229,7 +229,7 @@ void diff_SS() {
     byte displayStep[] = { tmpStep, ((tmpStep + 1) == 6 ? 0: tmpStep + 1) };
     bool state = false;
 
-    for (auto& e : displayStep) {
+    for (const auto& e : displayStep) {
         clr_dis();
         // TODO 
         display_function(e);
@@ -258,7 +258,7 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
     bool outDisplaySignal = false;
 
     if (!DP_only) {
-        for (int i = 0; i < 7; i++) {
+        for (int i(0); i < 7; i++) {
             outDisplaySignal = (((hex) >> (i)) & 0x01);
             //output
             digitalWrite(displayPins[i], !outDisplaySignal);
@@ -279,7 +279,7 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
 
  */
 # 247 "d:\\Arduino\\School\\EELab\\Sem2\\Final project no libary\\Final_project_main_No_lib.ino"
-void display_function(uint16_t step) {
+void display_function(const uint16_t& step) {
 
     Display_SevenSegments(0, false, true); //clear dp
 

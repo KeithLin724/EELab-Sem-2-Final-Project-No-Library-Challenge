@@ -48,7 +48,7 @@ volatile uint16_t mainStep = 0; // display step using for traverse the display a
 // step de-overflow func 
 #define nextStep(s) ((s + 1) == 6 ? 0: s + 1) 
 
-void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false);
+void Display_SevenSegments(const byte& hex, const bool& DP = false, const bool& DP_only = false);
 
 /**
  * @brief measure temperature function
@@ -83,7 +83,7 @@ int measure_distance() {
 }
 
 /// @brief convert voltage to a display array to display (is a custom function)
-void to_display_chr_custom(float number) {
+void to_display_chr_custom(const float& number) {
     String num_Str = "";
     auto tmpNumber = number;
     Serial.print("Mode: "); // Serial output the mode 
@@ -189,7 +189,7 @@ void loop() {
  *
  * @param f_s control the light pin
  */
-void passive_pin(boolean f_s) {
+void passive_pin(const boolean& f_s) {
     digitalWrite(pinDiff[0], f_s);
     digitalWrite(pinDiff[1], !f_s);
 }
@@ -206,7 +206,7 @@ void diff_SS() {
     byte displayStep[] = { tmpStep, nextStep(tmpStep) };
     bool state = false;
 
-    for (auto& e : displayStep) {
+    for (const auto& e : displayStep) {
         clr_dis();
         // TODO 
         display_function(e);
@@ -224,11 +224,11 @@ void diff_SS() {
  * @param DP About the decimal point
  * @param DP_only Control decimal point mode
  */
-void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
+void Display_SevenSegments(const byte& hex, const bool& DP = false, const bool& DP_only = false) {
     bool outDisplaySignal = false;
 
     if (!DP_only) {
-        for (int i = 0; i < 7; i++) {
+        for (uint8_t i(0); i < 7; i++) {
             outDisplaySignal = bitRead(hex, i);
             //output
             digitalWrite(displayPins[i], !outDisplaySignal);
@@ -244,7 +244,7 @@ void Display_SevenSegments(byte hex, bool DP = false, bool DP_only = false) {
  *
  * @param step about the loop display step
  */
-void display_function(uint16_t step) {
+void display_function(const uint16_t& step) {
 
     Display_SevenSegments(0, false, true); //clear dp
 
